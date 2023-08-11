@@ -1,5 +1,6 @@
 package com.platzi.pizza.persistence.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import lombok.Getter;
@@ -32,6 +33,7 @@ public class OrderItemEntity {
 
     @ManyToOne
     @JoinColumn(name = "orderId", insertable = false, updatable = false)
+    @JsonIgnore
     private OrderEntity order;
 
     @OneToOne

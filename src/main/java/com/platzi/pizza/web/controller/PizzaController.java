@@ -26,7 +26,10 @@ public class PizzaController {
 
     @GetMapping("/{pizzaId}")
     public ResponseEntity<PizzaEntity> get(@PathVariable int pizzaId) {
-        return ResponseEntity.ok(this.pizzaService.get(pizzaId));
+        if (this.pizzaService.exists(pizzaId)) {
+            return ResponseEntity.ok(this.pizzaService.get(pizzaId));
+        }
+        return ResponseEntity.noContent().build();
     }
 
     @PostMapping
@@ -42,6 +45,15 @@ public class PizzaController {
             return ResponseEntity.ok(this.pizzaService.save(pizza));
         }
         return ResponseEntity.badRequest().build();
+    }
+
+    @DeleteMapping("/{pizzaId}")
+    public ResponseEntity<Void> delete(@PathVariable int pizzaId) {
+        if (this.pizzaService.exists(pizzaId)) {
+            this.pizzaService.delete(pizzaId);
+            return ResponseEntity.ok().build();
+        }
+        return ResponseEntity.noContent().build();
     }
 
 }

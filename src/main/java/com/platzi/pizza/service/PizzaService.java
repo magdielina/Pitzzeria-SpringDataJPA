@@ -33,6 +33,10 @@ public class PizzaService {
         return this.pizzaRepository.save(pizza);
     }
 
+    public void delete(int pizzaId) {
+        this.pizzaRepository.deleteById(pizzaId);
+    }
+
     public boolean exists(int pizzaId) {
         return this.pizzaRepository.existsById(pizzaId);
     }
